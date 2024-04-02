@@ -15,18 +15,19 @@ const SignInPage = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        {console.log("Values:- ",values)}
+        
         axios.post('http://localhost:3001/api/v1/signin',values)
         .then(res => {
-          {console.log("Response:-> ",res.data);}
             if(res.data.success == true){
                 {console.log("Hello")}
                 navigate('/'); // Navigate to the root route
-            } else {
-                alert(res.data.message)
-            }
+            } 
         } )
-        .catch(err => console.log(err));
+        .catch(
+          err => {
+            navigate('/signup'); // Navigate to the root route
+            console.log("ERROR ",err)
+          } );
     }
 
   return (

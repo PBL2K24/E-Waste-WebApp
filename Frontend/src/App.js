@@ -17,11 +17,13 @@ function App() {
           setName(res.data.data);
         }
         else{
+          console.log("EXCECUTING PASSWORD FAILED")
           setAuth(false);
         }
       }
     )
     .catch(err => {
+      setAuth(false);
       console.error('Error fetching authentication status:', err);
     });
   },[])
@@ -36,6 +38,7 @@ function App() {
     <div>
       <h1>Home Page</h1>
       <h1>Not Authenticated</h1>
+      <h2> Sign UP First</h2>
     </div>
   )
   );
