@@ -1,5 +1,5 @@
 const UserService = require('../services/user-service');
-
+const cookies =require('cookie-parser')
 const userService = new UserService();
 
 const create = async (req,res) =>{
@@ -53,7 +53,12 @@ const signIn = async (req,res)=>{
 
 const isAuthenticated = async (req,res) =>{
     try{
-        const token = req.headers["x-acess-token"];
+        console.log("REQUEST COOKE TOKEN:- ",req.cookies);
+        const token = req.cookies.token; // Access token from cookies; 
+        if(!token){
+            console.log("We need to provide JSON Token")
+        }
+        console.log("Token:-> ", token);
         const response =await userService.isAuthenticated(token);
         return res.status(200).json({
             success: true,

@@ -60,9 +60,20 @@ class UserService{
     verifyToken(user){
         try{
             var response = jwt.verify(user,JWT_KEY);
+            if (!JWT_KEY) {
+                throw new Error('JWT_KEY is not defined');
+            }
+    
+            // Verify if user is a valid JWT token
+            if (!user) {
+                throw new Error('User token is empty or undefined');
+            }
+    
             return response;
         } catch(error){
             console.log("USER: ",user)
+            console.log("Response: ",response);
+            console.log("JWT_KEY:- ", JWT_KEY);
             console.log("Error occurs at verifing token.");
             throw error;
         }
@@ -77,23 +88,33 @@ class UserService{
         }
     }
 
-    async isAuthenticated(token){
-        try {
-            const response = this.verifyToken(token);
-            if(!response){
-                throw {error: "Token Invalid"}
-            }
-            const user =  await this.userRepository.getById(response.id);
-            if(!user){
-                throw {error: "User with that Token Not Found"}
-            }
-            return user.id;
-        } catch (error) {
-            console.log(" Something went wrong in IsAuthentication. ");
-            throw error;
+   async isAuthenticated(token) {
+    try {
+        // Verify the token
+        const decodedToken = this.verifyToken(token);
+
+        console.log("Decoded Token ", decodedToken);
+        // If token verification fails, throw an error
+        if (!decodedToken) {
+            throw new Error("Invalid token");
         }
 
+        // Retrieve the user using the user ID from the token
+        const user = await this.userRepository.getById(decodedToken.id);
+
+        // If user not found, throw an error
+        if (!user) {
+            throw new Error("User not found for the given token");
+        }
+
+        // Return the user's name
+        return user.name;
+    } catch (error) {
+        console.error("Error in isAuthenticated:", error);
+        throw error;
     }
+}
+
 
  
 
