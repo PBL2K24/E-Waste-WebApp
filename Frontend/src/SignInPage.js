@@ -8,7 +8,7 @@ const SignInPage = () => {
         email : "",
         password: "",
         points: 0
-})
+    })
     axios.defaults.withCredentials =true;
 
     const navigate = useNavigate();

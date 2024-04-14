@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, Route,RouterProvider, createRoutesFromElements } from 'react-router-dom';
 import SignInPage from './SignInPage';
 import Signup  from './Signup';
-
+import Map from './E-facilites/Map';
+import LocationComponent from './E-facilites/Map';
 
 const router =createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router =createBrowserRouter([
   {
     path: "/signup",
     element: <Signup/>
+  },
+  {
+    path: "/map",
+    element: <Map/>
   }
 ])
 
@@ -27,12 +32,10 @@ const router =createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-     <RouterProvider router={router} />
-  </React.StrictMode>
+  <LocationComponent>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </LocationComponent>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
