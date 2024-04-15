@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import getLocation from "../utils/getlocation";
 import mapboxgl , {Map, Popup} from "mapbox-gl";
 import { facility } from "../data/facility";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { calculateDistance } from "../utils/calculateLocation";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-
+import {Link } from "react-router-dom"
 const Facility = {
   address: "",
   distance: 0,
@@ -19,7 +20,7 @@ const Facility = {
 };
 
 const Efacilty = () => {
-  const [facilityData, setFacilityData] = useState(Facility);
+  const [facilityData, setFacilityData] = useState([]);
   const [clientLocation, setClientLocation] = useState([]);
   const markersRef= useRef([]);
   const mapRef = useRef(Map | null);
@@ -59,6 +60,8 @@ const Efacilty = () => {
         center: clientLocation,
         zoom: 10,
       });
+
+      mapRef.current =map;
       
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -106,7 +109,7 @@ const Efacilty = () => {
               nearestDistance = distance;
             }
           });
-          // getDirections(center, [nearestFacility.lon, nearestFacility.lat]);
+          getDirections(center, [nearestFacility.lon, nearestFacility.lat]);
         }
       }
       );
@@ -135,7 +138,7 @@ const Efacilty = () => {
         })
           .setLngLat([facility.lon,facility.lat])
           .setPopup(popup1)
-
+        console.log("Marker: ", marker);
         markersRef.current.push(marker);
 
         marker.addTo(map);
@@ -146,15 +149,24 @@ const Efacilty = () => {
           console.log("Hello:- ", markersRef, "Index", index);
           if (popup1) {
             if (popup1.isOpen()) {
+              console.log('ROM TOM')
               popup1.remove();
             } else {
               if (mapRef.current) {
-                popup1.addTo(mapRef.current);
+                popup1.addTo(mapRef.current);  
               }
             }
           }
           setSelectedFacility(index);
         });
+        const directionsBtn = document.getElementById(`directionsBtn${index}`);
+        if (directionsBtn) {
+          directionsBtn.addEventListener("click", () => {
+            if(clientLocation){
+              getDirections(clientLocation, [facility.lon, facility.lat]);
+            }
+          });
+        }
         
         popup1.on("close", () => {
           setSelectedFacility(null);
@@ -168,6 +180,73 @@ const Efacilty = () => {
 
     }
   }, [clientLocation,selectedFacility]); // Add clientLocation as a dependency
+
+  const getDirections = async (origin, destination) => {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/directions/v5/mapbox/walking/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${mapboxgl.accessToken}`
+      );
+  
+      const data = await response.json();
+  
+      if (data.code === "Ok" && mapRef.current) {
+        const distanceInKm = data.routes[0].distance / 1000;
+  
+        const directionsLayerId = "directions";
+        if (mapRef.current.getLayer(directionsLayerId)) {
+          mapRef.current.removeLayer(directionsLayerId);
+          mapRef.current.removeSource(directionsLayerId);
+        }
+  
+        mapRef.current.addSource(directionsLayerId, {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: data.routes[0].geometry,
+          },
+        });
+  
+        mapRef.current.addLayer({
+          id: directionsLayerId,
+          type: "line",
+          source: directionsLayerId,
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#3887be",
+            "line-width": 5,
+            "line-opacity": 0.75,
+          },
+        });
+  
+        const bounds = new mapboxgl.LngLatBounds();
+        data.routes[0].geometry.coordinates.forEach(coord =>
+          bounds.extend(coord)
+        );
+        mapRef.current.fitBounds(bounds, { padding: 20 });
+  
+        const routePopup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          offset: 25,
+          className: "h-8",
+        })
+          .setLngLat(data.routes[0].geometry.coordinates[0])
+          .setHTML(
+            `<p class="text-lg">Distance to Nearest Facility: ${distanceInKm.toFixed(
+              2
+            )} km</p>`
+          )
+          .addTo(mapRef.current);
+      }
+    } catch (error) {
+      console.error("Error fetching directions:", error);
+    }
+  };
+  
   
   useEffect(() => {
     if (
@@ -197,16 +276,72 @@ const Efacilty = () => {
           setSelectedFacility(index);
         });
       });
+      
 
       selectedMarker.getElement().click();
     }
+    console.log("Selected FACILITY ",selectedFacility);
+    console.log("Mapref ",mapRef,"markerRef ", markersRef)
   }, [selectedFacility])
   
+  useEffect(() => {
+    console.log("Facility Data Updated:", facilityData);
+  }, [facilityData]);
+  
   return(
-    <>
-    <h1>This is  Map Page</h1>
-    <div id="map" className="w-[100%] h-[500px]"></div>
-    </>
+    <div className="flex  h-[100%] overflow-hidden "> 
+      <>
+      <div
+            ref={cardContainerRef}
+            className="flex flex-col h-screen md:w-1/3 m-4 shadow-lg max-h-200 overflow-y-auto overflow-hidden"
+          >
+            {console.log("FUCK OFF ",facilityData)}
+            {facilityData.map((info, index) => (
+              <div
+                key={index}
+                className={`p-4 bg-white rounded-md border border-gray-300 cursor-pointer mb-4 
+          ${selectedFacility === index ? "bg-green-200" : ""}`}
+                onClick={() => {
+                  setSelectedFacility(index);
+                }}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-xl font-semibold">{info.name}</h2>
+                  {info.verified ? (
+                    <FaCheckCircle className="text-green-500 w-8 h-8 text-lg" />
+                  ) : (
+                    <FaTimesCircle className="text-red-500 w-8 h-8 text-lg" />
+                  )}
+                </div>
+                <p className="text-gray-600">Capacity: {info.capacity}</p>
+                <p className="text-gray-600">{info.address}</p>
+                <div className="my-2">
+                  <p className="text-lg text-gray-600">
+                    Contact: {info.contact}
+                  </p>
+                  <p className="text-lg text-gray-600">Time: {info.time}</p>
+                  <p className="text-lg pb-2 text-gray-600">
+                    Distance: {info.distance.toFixed(2)} Km away
+                  </p>
+                  <div className="flex space-x-6 ">
+                    <button
+                      className="btn-md btn-primary bg-red-400"
+                      id={`directionsBtn${index}`}
+                    >
+                      Get Directions
+                    </button>
+
+                    <Link href="/recycle" className="btn-md btn-primary">
+                      Book Recycling
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          </>
+      <div id="map" className=" w-[70%] h-[700px] overflow-y-hidden"></div>
+    </div>
   )
       
 
