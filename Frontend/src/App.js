@@ -1,6 +1,6 @@
 
 import './App.css';
-import SignInPage from './SignInPage';
+import SignInPage from './registration/SignInPage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 function App() {

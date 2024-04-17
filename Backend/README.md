@@ -14,3 +14,5 @@
     - Booking -> id, userId (foreign key), factoryId (foreign Key), status
     - Factory -> id, name, location, contact_details, availability
     - Transaction -> id, userId, points_earned, points_redeemed
+
+    -
