@@ -11,7 +11,13 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Bookings',
+          key: 'id',
+          as: 'userId',
+          allowNull: false
+        }
       },
       factoryId: {
         type: Sequelize.STRING,
