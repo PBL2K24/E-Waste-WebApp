@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useContext} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,19 +7,31 @@ import SignInPage from './registration/SignInPage';
 import Signup  from './registration/Signup';
 import Map from './E-facilites/Map';
 import Booking from './components/Booking';
+import UserContext from './utils/UserContext';
+import Profile from './components/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/signIN" element={<SignInPage />} />
-        <Route path="/signUp" element={<Signup />} />
-        <Route path="/map" element={<Map />} />
-        <Route path='/booking' element ={<Booking/>}/>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+const RootComponent= ()=>{
+  const [user,setUser] = useState({name:'not_signed_int',email: "sign@gmail.com", points: 0, id:-1});
+
+  console.log(" User after settingup ",user)
+    return(
+    <React.StrictMode>
+      <UserContext.Provider value={{user,setUser}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/signIN" element={<SignInPage />} />
+            <Route path="/signUp" element={<Signup />} />
+            <Route path="/map" element={<Map />} />
+            <Route path='/booking' element ={<Booking/>}/>
+            <Route path= '/profile' element= {<Profile/>}/>
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </React.StrictMode>
+    )
+}
+
+root.render(<RootComponent />);

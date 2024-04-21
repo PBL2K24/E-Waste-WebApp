@@ -5,7 +5,8 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { calculateDistance } from "../utils/calculateLocation";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import {Link } from "react-router-dom"
+import {Link } from "react-router-dom";
+import Navbar from "../components/navBar";
 const Facility = {
   address: "",
   distance: 0,
@@ -75,9 +76,9 @@ const Efacilty = () => {
     const fetchLocation = async () => {
       mapboxgl.accessToken ="pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw";
       const result = await getLocation();
-      console.log(result);
+    
       setClientLocation(result.coordinates);
-      console.log(clientLocation)
+     
     };
 
     fetchLocation();
@@ -93,9 +94,6 @@ const Efacilty = () => {
   //   console.log(" Client Location ",clientLocation);
   // }, []);
 
-  useEffect(()=>{
-    console.log("Client Location ",clientLocation)
-  },[clientLocation]);
   useEffect ( () => {
     if (clientLocation.length > 0) {
       const sortedFacilities = facility
@@ -111,8 +109,6 @@ const Efacilty = () => {
         .sort((a, b) => a.distance - b.distance);
   
       setFacilityData(sortedFacilities);
-      console.log("Facility DATA: ", facilityData);
-      console.log("Sorted List: ", sortedFacilities)
   
       // Initialize map once clientLocation is available
       const map = new mapboxgl.Map({
@@ -209,7 +205,6 @@ const Efacilty = () => {
           const popup1 = marker.getPopup();
           if (popup1) {
             if (popup1.isOpen()) {
-              console.log('ROM TOM')
               popup1.remove();
             } else {
               if (mapRef.current) {
@@ -345,7 +340,9 @@ const Efacilty = () => {
 
   
   return(
-    <div className="flex  h-[100%] overflow-hidden "> 
+    <div className="h-screen">
+    <Navbar/>
+    <div className="flex  h-[90%] overflow-hidden "> 
       <>
       <div
             ref={cardContainerRef}
@@ -396,6 +393,7 @@ const Efacilty = () => {
           </div>
           </>
       <div id="map" className=" w-[70%] h-[700px] overflow-y-hidden"></div>
+    </div>
     </div>
   )
       

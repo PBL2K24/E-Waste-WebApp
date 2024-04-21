@@ -108,7 +108,7 @@ class UserService{
         }
 
         // Return the user's name
-        return user.name;
+        return user;
     } catch (error) {
         console.error("Error in isAuthenticated:", error);
         throw error;

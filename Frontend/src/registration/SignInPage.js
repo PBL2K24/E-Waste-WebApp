@@ -1,14 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const SignInPage = () => {
+
     const [values, setValues] =useState({
         name: "",
         email : "",
         password: "",
         points: 0
     })
+    // const [user,setUser] =useContext(UserContext);
+
     axios.defaults.withCredentials =true;
 
     const navigate = useNavigate();
@@ -37,7 +41,8 @@ const SignInPage = () => {
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
           <input id="name" type="text" name="name" placeholder="Enter your name" 
-          onChange = {e => setValues({...values, name:e.target.value})}  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          onChange = {e => {setValues({...values, name:e.target.value})
+                           }}  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
