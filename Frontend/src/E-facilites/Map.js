@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import getLocation from "../utils/getlocation";
 import mapboxgl , {Map, Popup} from "mapbox-gl";
 import { facility } from "../data/facility";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
@@ -19,22 +18,84 @@ const Facility = {
   verified: false,
 };
 
+
+const getLocation = async () => {
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw';
+
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      };
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const coordinates = [lon, lat];
+          fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lon},${lat}.json?access_token=${mapboxgl.accessToken}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const address = data.features[0]?.place_name || null;
+              // console.log("Coordinates ",coordinates ,"Address", address)
+              resolve({ coordinates, address });
+            })
+            .catch((error) => {
+              console.error('Error fetching address:', error);
+              resolve({ coordinates: null, address: null });
+            });
+        },
+        (error) => {
+          console.error(error);
+          resolve({ coordinates: null, address: null });
+        },
+        options
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      resolve({ coordinates: null, address: null });
+    }
+  });
+};
+
+
+
 const Efacilty = () => {
   const [facilityData, setFacilityData] = useState([]);
-  const [clientLocation, setClientLocation] = useState([]);
+  const [clientLocation, setClientLocation] = useState({coordinates : null, address: null});
   const markersRef= useRef([]);
   const mapRef = useRef(Map | null);
   const userMarkersRef= useRef(mapboxgl.Marker | null);
   const [selectedFacility, setSelectedFacility] =useState(-1);
   const cardContainerRef = useRef(null)
-  useEffect(() => {
-    // Initialize map when component mounts
-    mapboxgl.accessToken =
-      "pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw";
 
-    setClientLocation([75.7139, 19.7515]);
+  useEffect(() => {
+    const fetchLocation = async () => {
+      mapboxgl.accessToken ="pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw";
+      const result = await getLocation();
+      console.log(result);
+      setClientLocation(result.coordinates);
+      console.log(clientLocation)
+    };
+
+    fetchLocation();
   }, []);
 
+
+  // useEffect(() => {
+  //   // Initialize map when component mounts
+  //   mapboxgl.accessToken =
+  //     "pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw";
+      
+  //   setClientLocation([75.7139, 19.7515]);
+  //   console.log(" Client Location ",clientLocation);
+  // }, []);
+
+  useEffect(()=>{
+    console.log("Client Location ",clientLocation)
+  },[clientLocation]);
   useEffect ( () => {
     if (clientLocation.length > 0) {
       const sortedFacilities = facility
@@ -138,7 +199,7 @@ const Efacilty = () => {
         })
           .setLngLat([facility.lon,facility.lat])
           .setPopup(popup1)
-        console.log("Marker: ", marker);
+     
         markersRef.current.push(marker);
 
         marker.addTo(map);
@@ -146,7 +207,6 @@ const Efacilty = () => {
         marker.getElement().addEventListener("click", () => {
           const marker = markersRef.current[index];
           const popup1 = marker.getPopup();
-          console.log("Hello:- ", markersRef, "Index", index);
           if (popup1) {
             if (popup1.isOpen()) {
               console.log('ROM TOM')
@@ -280,13 +340,9 @@ const Efacilty = () => {
 
       selectedMarker.getElement().click();
     }
-    console.log("Selected FACILITY ",selectedFacility);
-    console.log("Mapref ",mapRef,"markerRef ", markersRef)
   }, [selectedFacility])
   
-  useEffect(() => {
-    console.log("Facility Data Updated:", facilityData);
-  }, [facilityData]);
+
   
   return(
     <div className="flex  h-[100%] overflow-hidden "> 
@@ -295,7 +351,6 @@ const Efacilty = () => {
             ref={cardContainerRef}
             className="flex flex-col h-screen md:w-1/3 m-4 shadow-lg max-h-200 overflow-y-auto overflow-hidden"
           >
-            {console.log("FUCK OFF ",facilityData)}
             {facilityData.map((info, index) => (
               <div
                 key={index}
