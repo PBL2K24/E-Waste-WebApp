@@ -24,7 +24,7 @@ const SignInPage = () => {
         .then(res => {
             if(res.data.success == true){
                 {console.log("Hello")}
-                navigate('/'); // Navigate to the root route
+                navigate('/signIn/home'); // Navigate to the root route
             } 
         } )
         .catch(

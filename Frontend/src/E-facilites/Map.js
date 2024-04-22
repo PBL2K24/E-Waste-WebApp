@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import mapboxgl , {Map, Popup} from "mapbox-gl";
 import { facility } from "../data/facility";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
@@ -7,6 +7,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import {Link } from "react-router-dom";
 import Navbar from "../components/navBar";
+import UserContext from "../utils/UserContext";
 const Facility = {
   address: "",
   distance: 0,
@@ -337,7 +338,7 @@ const Efacilty = () => {
     }
   }, [selectedFacility])
   
-
+  const {user,setUser} = useContext(UserContext);
   
   return(
     <div className="h-screen">
@@ -349,6 +350,7 @@ const Efacilty = () => {
             className="flex flex-col h-screen md:w-1/3 m-4 shadow-lg max-h-200 overflow-y-auto overflow-hidden"
           >
             {facilityData.map((info, index) => (
+             
               <div
                 key={index}
                 className={`p-4 bg-white rounded-md border border-gray-300 cursor-pointer mb-4 
@@ -357,7 +359,7 @@ const Efacilty = () => {
                   setSelectedFacility(index);
                 }}
               >
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-2 ">
                   <h2 className="text-xl font-semibold">{info.name}</h2>
                   {info.verified ? (
                     <FaCheckCircle className="text-green-500 w-8 h-8 text-lg" />
@@ -377,13 +379,13 @@ const Efacilty = () => {
                   </p>
                   <div className="flex space-x-6 ">
                     <button
-                      className="btn-md btn-primary bg-red-400"
+                      className="btn-md btn-primary bg-purple-700 p-4 text-white rounded-md"
                       id={`directionsBtn${index}`}
                     >
                       Get Directions
                     </button>
 
-                    <Link href="/recycle" className="btn-md btn-primary">
+                    <Link to="/booking" onClick={setUser({...user,location: info.address})} className=" btn-primary bg-purple-700 p-4 text-center text-white rounded-md">
                       Book Recycling
                     </Link>
                   </div>

@@ -14,7 +14,7 @@ const startServer = () => {
     app.use(cookieParser());
     // Define CORS options
     const corsOptions = {
-        origin: 'http://192.168.176.242:3000',
+        origin: 'http://192.168.0.145:3000',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Allow cookies and other credentials to be sent with the request
         preflightContinue: true,
