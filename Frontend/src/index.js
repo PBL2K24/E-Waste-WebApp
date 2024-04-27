@@ -10,6 +10,8 @@ import Booking from './components/Booking';
 import UserContext from './utils/UserContext';
 import Profile from './components/Profile';
 import ContactUs from './components/ContactUs';
+import { Provider } from 'react-redux';
+import { appStore } from './utils/appStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,7 +20,7 @@ const RootComponent= ()=>{
 
   // console.log(" User after settingup ",user)
     return(
-    <React.StrictMode>
+    <Provider store={appStore}>
       <UserContext.Provider value={{user,setUser}}>
         <BrowserRouter>
           <Routes>
@@ -32,7 +34,7 @@ const RootComponent= ()=>{
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
-    </React.StrictMode>
+    </Provider>
     )
 }
 

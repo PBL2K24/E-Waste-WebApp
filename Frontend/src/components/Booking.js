@@ -1,53 +1,32 @@
 import React, { useState, useContext,useEffect } from 'react';
 import Navbar from './navBar';
 import axios from 'axios';
-import UserContext from '../utils/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Booking = () => {
-  const { user,setUser } = useContext(UserContext);
+  const navigate =  useNavigate();
+    
+  const user =useSelector((store)=> store.user);    
+ console.log("User: ",user);
+  useEffect(()=>{
+    if(user === null){
+      console.log("Hello");
+      navigate('/');
+    }
+    
+  },[user]);
+  
   var [wasteName,setWastname] =useState("")
   var [values, setValues] = useState({
-    userId: user.id,
+    userId: user?user.id:null,
     factoryId: 0,
     status: "booked",
     wasteName: "",
     location: "",
     phoneNo: "",
     modelName: "",
-    name: user.name
+    name: user?user.name:""
   });
-    
-    const [auth,setAuth] = useState(false);
-    const navigate =  useNavigate();
-    
-    useEffect( ()=> {
-      axios.get('http://localhost:3001/api/v1/isAuthenticated')
-      .then(
-        res => {
-          if(res.data.success){
-            setAuth(true);
-            setUser({name:res.data.data.name, id:res.data.data.id,email:res.data.data.email,points:0})
-            console.log(" User set in the booking project: ", user);
-          }
-          else{
-            console.log("EXCECUTING PASSWORD FAILED")
-            setAuth(false);
-            navigate('/');
-          }
-        }
-      )
-      .catch(err => {
-        setAuth(false);
-        navigate('/');
-        console.error('Error fetching authentication status:', err);
-      });
-    },[])
-    
-  
-
-
-
-
  
   const handleSubmit = async () => {
     const response = await axios.post('http://localhost:3001/api/v1/booking', values);

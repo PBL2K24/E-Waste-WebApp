@@ -4,33 +4,25 @@ import { Link } from 'react-router-dom';
 import {useContext, useEffect, useState } from 'react';
 import UserContext from '../utils/UserContext';
 import SignInPage from '../registration/SignInPage';
+import { addUser } from '../utils/userSlice';
+import {useDispatch} from 'react-redux';
 
 export const HomePage = () => {
-    var [auth, setAuth] =useState(false);
-    var [name,setName] =useState("");
-    var [userId,setUserId] = useState(-1);
-    var [email, setEmail] =useState("");
-    var  {user,setUser} = useContext(UserContext);
-
+  
+  const dispatch =useDispatch();
   useEffect( ()=> {
     axios.get('http://localhost:3001/api/v1/isAuthenticated')
     .then(
       res => {
         if(res.data.success){
-          setAuth(true);
-          setName(res.data.data.name);
-          setUser({name:res.data.data.name, id:res.data.data.id,email:res.data.data.email,points:0})
-          setUserId(res.data.data.id);
-          setEmail(res.data.data.email);
+          dispatch(addUser({name:res.data.data.name, id:res.data.data.id,email:res.data.data.email,points:0}))
         }
         else{
-          console.log("EXCECUTING PASSWORD FAILED")
-          setAuth(false);
+          console.log("EXCECUTING PASSWORD FAILED");
         }
       }
     )
     .catch(err => {
-      setAuth(false);
       console.error('Error fetching authentication status:', err);
     });
   },[])

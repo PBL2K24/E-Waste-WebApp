@@ -5,6 +5,7 @@ import UserContext from "../utils/UserContext";
 
 const SignInPage = () => {
 
+  
     const [values, setValues] =useState({
         name: "",
         email : "",
@@ -35,7 +36,7 @@ const SignInPage = () => {
 
   return (
     <div className="bg-white p-8 rounded shadow-md w-96">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
