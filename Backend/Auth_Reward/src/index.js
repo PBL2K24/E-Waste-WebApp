@@ -9,12 +9,9 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const startServer = () => {
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(cookieParser());
     // Define CORS options
     const corsOptions = {
-        origin: 'http://192.168.0.145:3000',
+        origin: 'http://localhost:3000',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Allow cookies and other credentials to be sent with the request
         preflightContinue: true,
@@ -24,6 +21,10 @@ const startServer = () => {
 
     // Enable CORS with options
     app.use(cors(corsOptions));
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(cookieParser());
 
     app.use('/api', apiRoutes);
 

@@ -23,9 +23,8 @@ const SignInPage = () => {
         axios.post('http://localhost:3001/api/v1/signin',values)
         .then(res => {
             if(res.data.success == true){
-                {console.log("Hello")}
                 navigate('/signIn/home'); // Navigate to the root route
-            } 
+              }  
         } )
         .catch(
           err => {

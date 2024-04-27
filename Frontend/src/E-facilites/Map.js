@@ -94,6 +94,9 @@ const Efacilty = () => {
   //   setClientLocation([75.7139, 19.7515]);
   //   console.log(" Client Location ",clientLocation);
   // }, []);
+  useEffect(()=>{
+    console.log(" ClientLocation: ",clientLocation, " Client Location length: ",clientLocation.length);;
+  },[clientLocation]);
 
   useEffect ( () => {
     if (clientLocation.length > 0) {

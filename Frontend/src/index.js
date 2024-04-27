@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const RootComponent= ()=>{
   const [user,setUser] = useState({name:'not_signed_int',email: "sign@gmail.com", points: 0, id:-1});
 
-  console.log(" User after settingup ",user)
+  // console.log(" User after settingup ",user)
     return(
     <React.StrictMode>
       <UserContext.Provider value={{user,setUser}}>
