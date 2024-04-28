@@ -6,7 +6,7 @@ import UserContext from '../utils/UserContext';
 import SignInPage from '../registration/SignInPage';
 import { addUser } from '../utils/userSlice';
 import {useDispatch} from 'react-redux';
-
+import img1 from '../data/img-1.jpg'
 export const HomePage = () => {
   
   const dispatch =useDispatch();
@@ -30,13 +30,45 @@ export const HomePage = () => {
   
   return (
     <>
-       <div className="bg-cover bg-center bg-no-repeat bg-fixed bg-custom overflow-hidden "> 
-            <div className="flex flex-col h-[100%] justify-center items-center text-center bg-black bg-opacity-50">
-                <h1 className="text-4xl text-purple-400 mb-8">Welcome to E-WASTE Locator</h1>
-                <Link to={'/map'}> <button type="button" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">Search For Nearby Facilites</button></Link>
-                <Link to={'/booking'}><button type="button" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">Booked Now</button></Link> 
+        <div className='bg-[#FEFEFE] h-[92%] text-[#FEFEFF] flex  '>
+           <img src= {img1} alt="image" className='ml-1 '/>
+          <div className='flex flex-col justify-around'>
+            <h1 className='text-7xl ml-20 pt-20 text-black font-bold'>
+                REDUCE
+            </h1>
+            <h1 className='text-9xl ml-20 pt-2 text-black font-bold reduce-text animate-bounce'>
+                RECYCLE
+            </h1>
+            <h1 className='text-7xl ml-20 pt-2 text-black font-bold'>
+                REUSE
+            </h1>
+            <h1 className='text-4xl ml-20 pt-4 text-[#248619]'>
+                Often when you think you're at the end of something, 
+            </h1>
+            <h1 className='text-4xl ml-20  text-[#248619]'>
+               You are at the beginning of something else. 
+            </h1>
+            <div className='pl-10 py-4 ml-20'>
+            <Link to={'/map'} >
+              <button
+                        type="submit"
+                        className="bg-[#] py-2 px-8 m-4 rounded-3xl  outline-none w-fit text-[#248619] font-bold shadow-md shadow-primary border-3 border-[#248619] hover:bg-[#248619] hover:text-white active:bg-[#FEFEFE] active:text-[#248619] mb-2 ">
+                        {"Find Center"}
+              </button>
+            </Link>
+            <Link to={'/booking'}>
+              <button
+                        type="submit"
+                        className="bg-[#] py-2 m-4 px-8 rounded-3xl  outline-none w-fit text-[#248619] font-bold shadow-md shadow-primary border-3 border-[#248619] hover:bg-[#248619] hover:text-white active:bg-[#FEFEFE] active:text-[#248619] mb-2 ">
+                        {"Booked"}
+              </button>
+            </Link>
+            
             </div>
-        </div> 
+            </div>
+           
+            
+        </div>
     </>
   )
 }

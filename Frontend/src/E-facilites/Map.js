@@ -388,13 +388,13 @@ const Efacilty = () => {
                   </p>
                   <div className="flex space-x-6 ">
                     <button
-                      className="btn-md btn-primary bg-purple-700 p-4 text-white rounded-md"
+                      className="btn-md btn-primary bg-green-700 p-4 text-white rounded-md"
                       id={`directionsBtn${index}`}
                     >
                       Get Directions
                     </button>
 
-                    <Link to="/booking" onClick={()=>{dispatch(addUserLocation({coordinates: [info.lon,info.lat],address: info.address}))}}  className=" btn-primary bg-purple-700 p-4 text-center text-white rounded-md">
+                    <Link to="/booking" onClick={()=>{dispatch(addUserLocation({coordinates: [info.lon,info.lat],address: info.address}))}}  className=" btn-primary bg-green-700 p-4 text-center text-white rounded-md">
                       Book Recycling
                     </Link>
                   </div>

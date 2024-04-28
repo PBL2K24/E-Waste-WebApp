@@ -14,7 +14,8 @@ const userSlice = createSlice({
             state.userLocation = action.payload
         },
         removeUser : (state,action) =>{
-            return null;
+            state.user =null;
+            state.userLocation =null
         }
     }
 })

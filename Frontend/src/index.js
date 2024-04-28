@@ -12,6 +12,8 @@ import Profile from './components/Profile';
 import ContactUs from './components/ContactUs';
 import { Provider } from 'react-redux';
 import { appStore } from './utils/appStore';
+import AboutUs from './components/AboutUs';
+import SucessPage from './components/SucessPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -31,6 +33,8 @@ const RootComponent= ()=>{
             <Route path='/booking' element ={<Booking/>}/>
             <Route path= '/profile' element= {<Profile/>}/>
             <Route path='/contact' element={<ContactUs/>}/>
+            <Route path='/about' element={<AboutUs/>}/>
+            <Route path='/success' element={<SucessPage/>}/>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
