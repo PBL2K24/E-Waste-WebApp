@@ -16,6 +16,7 @@ export const HomePage = () => {
       res => {
         if(res.data.success){
           dispatch(addUser({name:res.data.data.name, id:res.data.data.id,email:res.data.data.email,points:0}))
+          console.log("User Added sucessfull");
         }
         else{
           console.log("EXCECUTING PASSWORD FAILED");

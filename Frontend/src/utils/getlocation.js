@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-
+import { useDispatch } from 'react-redux';
+import { addUserLocation } from './userSlice';
 const getLocation = async () => {
   mapboxgl.accessToken = 'pk.eyJ1Ijoic2h1ZW5jZSIsImEiOiJjbG9wcmt3czMwYnZsMmtvNnpmNTRqdnl6In0.vLBhYMBZBl2kaOh1Fh44Bw';
 
@@ -43,23 +44,16 @@ const getLocation = async () => {
 
 const LocationComponent = () => {
   const [location, setLocation] = useState({ coordinates: null, address: null });
-
+  const dispatch =useDispatch();
   useEffect(() => {
     const fetchLocation = async () => {
       const result = await getLocation();
-      setLocation(result);
+      dispatch(addUserLocation(result));
     };
 
     fetchLocation();
   }, []);
 
-  return (
-    <div>
-      <h1>Location Information</h1>
-      <p>Coordinates: {location.coordinates ? location.coordinates.join(', ') : 'Loading...'}</p>
-      <p>Address: {location.address || 'Loading...'}</p>
-    </div>
-  );
 };
 
 export default LocationComponent;
