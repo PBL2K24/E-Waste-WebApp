@@ -118,25 +118,25 @@ npx sequelize-cli db:migrate
 ## 📷 Screenshots
 
 ### 🏠 Home Page
-![Home Page](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/Home.png)
+![Home Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Home.png)
 
 ### 🔐 Sign In Page
-![Sign In](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/signin.png)
+![Sign In](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/signin.png)
 
 ### 🗺️ Map View
-![Map View](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/map.png)
+![Map View](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/map.png)
 
 ### 📅 Booking Page
-![Booking Page](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/booking.png)
+![Booking Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/booking.png)
 
 ### 👤 Profile Page
-![Profile](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/profile.png)
+![Profile](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/profile.png)
 
 ### 📞 Contact Us Page
-![Contact](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/contact.png)
+![Contact](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/contact.png)
 
 ### ℹ️ About Us Page
-![About Us](https://raw.githubusercontent.com/Karthikraut/eco-jugaad/main/frontend/public/images/about.png)
+![About Us](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/AboutUs.png)
 
 
 
