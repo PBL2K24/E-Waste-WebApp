@@ -38,6 +38,31 @@ EcoJugaad addresses the global challenge of electronic waste management by provi
 | **APIs**     | Mapbox GL JS for interactive maps, Geolocation API for user location detection     |
 | **Tools**    | ESLint, Prettier, Jest (for testing), Vercel (for deployment), Git, npm            |
 
+## 📷 Screenshots
+
+### 🏠 Home Page
+![Home Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Home.png)
+
+### 🔐 Sign In Page
+![Sign In](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/SignIN.png)
+
+### 🗺️ Map View
+![Map View](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Map.png)
+
+### 📅 Booking Page
+![Booking Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Booking.png)
+
+### 👤 Profile Page
+![Profile](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Profile.png)
+
+### 📞 Contact Us Page
+![Contact](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/ContactUs.png)
+
+### ℹ️ About Us Page
+![About Us](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/AboutUs.png)
+
+
+
 ## 📂 Project Structure
 
 ```
@@ -123,32 +148,6 @@ NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
 cd backend
 npx sequelize-cli db:migrate
 ```
-
-## 📷 Screenshots
-
-### 🏠 Home Page
-![Home Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Home.png)
-
-### 🔐 Sign In Page
-![Sign In](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/SignIN.png)
-
-### 🗺️ Map View
-![Map View](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Map.png)
-
-### 📅 Booking Page
-![Booking Page](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Booking.png)
-
-### 👤 Profile Page
-![Profile](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/Profile.png)
-
-### 📞 Contact Us Page
-![Contact](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/ContactUs.png)
-
-### ℹ️ About Us Page
-![About Us](https://github.com/PBL2K24/E-Waste-WebApp/blob/main/Frontend/public/images/AboutUs.png)
-
-
-
 
 ## 🔍 Challenges Overcome
 
