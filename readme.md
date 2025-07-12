@@ -170,6 +170,6 @@ Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) and ensure code adheres 
 ## 🧑‍💻 Author
 
 **Karthik Raut**  
-📧 [karthikraut@example.com](mailto:karthikraut2@gmail.com)  
+📧 [karthikraut2@gmail.com](mailto:karthikraut2@gmail.com)  
 🌐 [LinkedIn](https://www.linkedin.com/in/karthik-raut-b5a6a7243) | [GitHub](https://github.com/Karthikraut)
 
