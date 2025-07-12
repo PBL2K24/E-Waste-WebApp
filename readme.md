@@ -18,7 +18,6 @@ EcoJugaad addresses the global challenge of electronic waste management by provi
 
 * **🔎 Advanced Search & Filters**: Filter facilities by distance, waste type, or availability, with optimized queries for fast response times.
 
-* **📊 Admin Dashboard**: Manage facility data (add/edit/delete) through a dedicated interface, secured with role-based access control (RBAC).
 
 * **📅 Booking System**: Schedule drop-off appointments with recycling centers, integrated with facility availability for a seamless user experience.
 
@@ -26,7 +25,6 @@ EcoJugaad addresses the global challenge of electronic waste management by provi
 
 * **⚡ Performance Optimized**: Fast performance with efficient state management and optimized API requests, optionally leveraging SSR for scalability.
 
-* **🔒 Security First**: Includes input validation, secure API routing, HTTPS support, and environment variable management for production readiness.
 
 
 
