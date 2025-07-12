@@ -8,16 +8,27 @@ EcoJugaad addresses the global challenge of electronic waste management by provi
 
 ## 🌟 Features
 
-- **📍 Location-Based Search**: Find nearby e-waste recycling centers using geolocation and Mapbox GL JS, with real-time distance calculations for user convenience.
-- **🗺️ Interactive Map Interface**: Visualize recycling facilities on an interactive map with zoom, pan, and marker pop-ups displaying details like name, address, and contact information.
-- **📝 Facility Details**: View comprehensive information about each facility, including operating hours, supported e-waste types (e.g., batteries, laptops), and contact details.
-- **🔐 Secure Authentication**: Optional user registration and login with JWT-based authentication, ensuring secure access to personalized features like booking history.
-- **🔎 Advanced Search & Filters**: Filter facilities by distance, waste type, or availability, with optimized queries for fast response times.
-- **📊 Admin Dashboard**: Manage facility data (add/edit/delete) through a dedicated interface, secured with role-based access control (RBAC).
-- **📅 Booking System**: Schedule drop-off appointments with recycling centers, integrated with facility availability for a seamless user experience.
-- **📱 Responsive Design**: Fully responsive UI built with Tailwind CSS, ensuring accessibility on mobile, tablet, and desktop devices.
-- **⚡ Performance Optimized**: Server-side rendering (SSR) and static site generation (SSG) with Next.js for fast load times and SEO optimization.
-- **🔒 Security First**: Implements input validation, SQL injection prevention, and secure API endpoints with HTTPS and environment variable management.
+* **📍 Location-Based Search**: Find nearby e-waste recycling centers using geolocation and Mapbox GL JS, with real-time distance calculations for user convenience.
+
+* **🗺️ Interactive Map Interface**: Visualize recycling facilities on an interactive map with zoom, pan, and marker pop-ups displaying details like name, address, and contact information.
+
+* **📝 Facility Details**: View comprehensive information about each facility, including operating hours, supported e-waste types (e.g., batteries, laptops), and contact details.
+
+* **🔐 Secure Authentication**: Optional user registration and login with JWT-based authentication, ensuring secure access to personalized features like booking history.
+
+* **🔎 Advanced Search & Filters**: Filter facilities by distance, waste type, or availability, with optimized queries for fast response times.
+
+* **📊 Admin Dashboard**: Manage facility data (add/edit/delete) through a dedicated interface, secured with role-based access control (RBAC).
+
+* **📅 Booking System**: Schedule drop-off appointments with recycling centers, integrated with facility availability for a seamless user experience.
+
+* **📱 Responsive Design**: Fully responsive UI built with Tailwind CSS and React, ensuring accessibility on mobile, tablet, and desktop devices.
+
+* **⚡ Performance Optimized**: Fast performance with efficient state management and optimized API requests, optionally leveraging SSR for scalability.
+
+* **🔒 Security First**: Includes input validation, secure API routing, HTTPS support, and environment variable management for production readiness.
+
+
 
 ## 🛠️ Tech Stack
 
