@@ -40,17 +40,6 @@ const SignInPage = () => {
         <h2 className="text-2xl font-bold mb-4 text-green-800">Sign In</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              onChange={e => setValues({ ...values, name: e.target.value })}
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
             <input
               id="email"

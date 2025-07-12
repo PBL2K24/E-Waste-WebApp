@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "Karthik@123", 
-    "database": "E-waste_Locator_Webapp",
+    "database": "e_waste_locator_webapp",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
